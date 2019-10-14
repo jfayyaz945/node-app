@@ -41,6 +41,38 @@ exports.getCheckout = (req, res, next) => {
     });
 };
 
+exports.getAboutPage = (req, res, next) => {
+    res.render('shop/about', {
+        pageTitle: 'About', 
+        path: '/about'
+        
+    });
+};
+
+exports.getBlogPage = (req, res, next) => {
+    res.render('shop/blog', {
+        pageTitle: 'Blog', 
+        path: '/blog'
+        
+    });
+};
+
+exports.getBlogSinglePage = (req, res, next) => {
+    res.render('shop/blog-single', {
+        pageTitle: 'Blog Single', 
+        path: '/blog-single'
+        
+    });
+};
+
+exports.getContactPage = (req, res, next) => {
+    res.render('shop/contact', {
+        pageTitle: 'Contact', 
+        path: '/contact'
+        
+    });
+};
+
 exports.getProducts = (req, res, next) => {
     Product.find()
       .then(products => {
