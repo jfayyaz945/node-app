@@ -1,0 +1,11 @@
+# Global files
+
+*.zip
+.svn
+.DS_Store
+thumbs.db
+
+# Nodejs files
+
+node_modules/
+app.js
