@@ -4,6 +4,7 @@ An ecommerce application developed in node js using open source bootstrap 4 them
 
 ## Tools
 
+* JavaScript
 * HTML/CSS
 * Bootstrap 4
 * Nodejs
