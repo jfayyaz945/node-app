@@ -1,30 +1,47 @@
 <%- include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="/css/forms.css">
-    <link rel="stylesheet" href="/css/auth.css">
 </head>
+<body class="goto-here">
+    <%- include('../includes/top.ejs') %>
 
-<body>
-   <%- include('../includes/nav.ejs') %>
+    <%- include('../includes/nav.ejs') %>
 
-    <main>
-        <% if (errorMessage) { %>
-            <div class="user-message user-message--error"><%= errorMessage %></div>
-        <% } %>
-        <form class="login-form" action="/signup" method="POST" novalidate>
-            <div class="form-control">
-                <label for="email">E-Mail</label>
-                <input class = "<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>" type="email" name="email" value="<%= oldInput.email %>" id="email">
+    <section class="ftco-section contact-section bg-light">
+        <div class="container">
+            <div class="row block-12">
+                <div class="col-md-12 order-md-last d-flex">
+                    <% if (errorMessage) { %>
+                        <div class="user-message user-message--error"><%= errorMessage %></div>
+                    <% } %>
+                    <form class="login-form" action="/signup" method="POST" class="bg-white p-5 contact-form" novalidate>
+                        <h3 class="mb-4 billing-heading">SignUp</h3>
+                        <div class="form-group">
+                            <label for="email">E-Mail</label>
+                            <input class = "<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %> form-control" type="email" name="email" value="<%= oldInput.email %>" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input class = "<%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %> form-control" type="password" name="password" value="<%= oldInput.password %>" id="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" name="confirmPassword" class="form-control" id="confirmPassword">
+                        </div>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button class="btn btn-primary py-3 px-5" type="submit">Signup</button>
+                    </form>
+                </div>
             </div>
-            <div class="form-control">
-                <label for="password">Password</label>
-                <input class = "<%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>" type="password" name="password" value="<%= oldInput.password %>" id="password">
-            </div>
-            <div class="form-control">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" name="confirmPassword" id="confirmPassword">
-            </div>
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button class="btn" type="submit">Signup</button>
-        </form>
-    </main>
+        </div>
+    </section>
+    
+    <%- include('../includes/testimonial.ejs') %>
+    <%- include('../includes/services.ejs') %>
+  
+    <hr>
+      
+    <%- include('../includes/footer.ejs') %>
+  
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  
 <%- include('../includes/end.ejs') %>

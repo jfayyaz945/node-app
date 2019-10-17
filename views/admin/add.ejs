@@ -1,35 +1,52 @@
 <%- include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="/css/forms.css">
-    <link rel="stylesheet" type="text/css" href="/css/product.css">
 </head>
-<body>
+<body class="goto-here">
+    <%- include('../includes/top.ejs') %>
+        
     <%- include('../includes/nav.ejs') %>
-    <main>
-        <% if (errorMessage) { %>
-            <div class="user-message user-message--error"><%= errorMessage %></div>
-        <% } %>
-        <form class="product-form" action="/admin/<% if(editing){ %>edit<% }else{ %>add<% } %>" method="POST">
-            <div class="form-control">
-                <label for="title">Title</label>
-                <input type="text" class = "<%= validationErrors.find(e => e.param === 'title') ? 'invalid' : '' %>" id="title" name="title" value="<% if(editing || hasError){ %><%=product.title%><% } %>">
+    <section class="ftco-section contact-section bg-light">
+        <div class="container">
+            <div class="row block-8">
+                <div class="col-md-8 offset-md-4 order-md-last d-flex">
+                    <% if (errorMessage) { %>
+                        <div class="user-message user-message--error"><%= errorMessage %></div>
+                    <% } %>
+                    <form class="product-form" action="/admin/<% if(editing){ %>edit<% }else{ %>add<% } %>" method="POST">
+                        <h3 class="mb-4 billing-heading">Add Product</h3>
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" class = "form-control <%= validationErrors.find(e => e.param === 'title') ? 'invalid' : '' %>" id="title" name="title" value="<% if(editing || hasError){ %><%=product.title%><% } %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="imageUrl">Image URL</label>
+                            <input type="text" class = "form-control <%= validationErrors.find(e => e.param === 'imageUrl') ? 'invalid' : '' %>" id="imageUrl" name="imageUrl" value="<% if(editing || hasError){ %><%=product.imageUrl%><% } %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="number" class = "form-control <%= validationErrors.find(e => e.param === 'price') ? 'invalid' : '' %>" step="0.0" id="price" name="price" value="<% if(editing || hasError){ %><%=product.price%><% } %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea id="description" class = "form-control <%= validationErrors.find(e => e.param === 'description') ? 'invalid' : '' %>" name="description" rows="5"><% if(editing || hasError){ %><%=product.description%><% } %></textarea>
+                        </div>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <% if(editing){ %>
+                            <input type="hidden" name="productId" value="<%=product._id%>">
+                        <% }else %>
+                        <button type="submit" class="btn btn-primary py-3 px-5"><% if(editing || hasError){ %> Update Product <% }else{ %>Add Product <% } %></button>
+                    </form>
+                </div>
             </div>
-            <div class="form-control">
-                <label for="imageUrl">Image URL</label>
-                <input type="text" class = "<%= validationErrors.find(e => e.param === 'imageUrl') ? 'invalid' : '' %>" id="imageUrl" name="imageUrl" value="<% if(editing || hasError){ %><%=product.imageUrl%><% } %>">
-            </div>
-            <div class="form-control">
-                <label for="price">Price</label>
-                <input type="number" class = "<%= validationErrors.find(e => e.param === 'price') ? 'invalid' : '' %>" step="0.0" id="price" name="price" value="<% if(editing || hasError){ %><%=product.price%><% } %>">
-            </div>
-            <div class="form-control">
-                <label for="description">Description</label>
-                <textarea id="description" class = "<%= validationErrors.find(e => e.param === 'description') ? 'invalid' : '' %>" name="description" rows="5"><% if(editing || hasError){ %><%=product.description%><% } %></textarea>
-            </div>
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <% if(editing){ %>
-                <input type="hidden" name="productId" value="<%=product._id%>">
-            <% }else %>
-            <button type="submit"><% if(editing || hasError){ %> Update Product <% }else{ %>Add Product <% } %></button>
-        </form>
-    </main>
+        </div>
+    </section>
+    <%- include('../includes/testimonial.ejs') %>
+    <%- include('../includes/services.ejs') %>
+  
+    <hr>
+      
+    <%- include('../includes/footer.ejs') %>
+  
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  
 <%- include('../includes/end.ejs') %>
